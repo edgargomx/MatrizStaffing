@@ -39,29 +39,39 @@ class IbLogin extends LitElement {
     }
 
   sendUser (){
-
-    const userIronNode = this._getNode('#userIron');
-    const passwordIronNode =  this._getNode('#passwordIron');
-
-    const dataUser =  {
-      user : userIronNode.value,
-      password : passwordIronNode.value
-
-    }
-
+    let valide = this.fieldvalidator();
     
-    this.dispatchEvent(new new CustomEvent('send-user-ib',{
-      detail:dataUser
-    }));
+    if(valide){
+      const userIronNode = this._getNode('#userIron');
+      const passwordIronNode =  this._getNode('#passwordIron');
+      const dataUser =  {
+        user : userIronNode.value,
+        password : passwordIronNode.value
+      }
+      this.dispatchEvent( new CustomEvent('send-user-ib',{
+        detail:dataUser
+      }));
+    }
   }
-  
 
   fieldvalidator(){
-
-    
-
-    
+    if(this.shadowRoot.querySelector('#userIron').value === '' && this.shadowRoot.querySelector('#passwordIron').value === '' ){
+      alert ('Los campos estan vacios son datos necesarios para ingresar');
+        return false;
+    }else{
+      if(this.shadowRoot.querySelector('#userIron') === '' ){
+        alert ('El campo usuario esta vacio, es un campo obligatorio debe ser llenado para ingresar');
+        return false;
+    }else{
+      if(this.shadowRoot.querySelector('#passwordIron') === '' ){
+        alert ('El campo password esta vacio, es un campo obligatorio debe ser llenado para ingresar');
+        return false;
+      }else{
+        return true
+      }
+    }
   }
+}
 
   _getNode(query) {
     return this.shadowRoot.querySelector(query);
