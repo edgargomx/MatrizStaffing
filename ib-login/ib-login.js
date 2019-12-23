@@ -55,15 +55,18 @@ class IbLogin extends LitElement {
   }
 
   fieldvalidator(){
-    if(this.shadowRoot.querySelector('#userIron').value === '' && this.shadowRoot.querySelector('#passwordIron').value === '' ){
+    let user = this.shadowRoot.querySelector('#userIron').value;
+    let password =  this.shadowRoot.querySelector('#passwordIron').value;
+
+    if( user === '' && password === '' ){
       alert ('Los campos estan vacios son datos necesarios para ingresar');
         return false;
     }else{
-      if(this.shadowRoot.querySelector('#userIron') === '' ){
+      if( user === '' ){
         alert ('El campo usuario esta vacio, es un campo obligatorio debe ser llenado para ingresar');
         return false;
     }else{
-      if(this.shadowRoot.querySelector('#passwordIron') === '' ){
+      if(password === '' ){
         alert ('El campo password esta vacio, es un campo obligatorio debe ser llenado para ingresar');
         return false;
       }else{
