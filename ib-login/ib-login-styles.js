@@ -11,4 +11,14 @@ export default css`
 *, *:before, *:after {
   box-sizing: inherit;
   font-family: inherit; }
+
+#conteiner, .fields {
+  margin-top: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+
+#conteiner {
+  margin-top: 15rem; }
 `;
