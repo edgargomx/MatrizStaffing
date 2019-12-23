@@ -3,18 +3,24 @@
   "version": "1.0.0",
   "description": "Catsys component generated",
   "main": "hours-form.js",
-  "keywords": ["lit-element", "component"],
+  "keywords": [
+    "lit-element",
+    "component"
+  ],
   "author": "autogenered <hello@catsys.com>",
   "license": "MIT",
   "scripts": {
-      "karma": "karma",
-      "test": "karma start"
-    },
-    "dependencies": {
-      "lit-element": "^2.0.0"
-    },
-    "devDependencies": {
-      "@open-wc/testing": "^0.9.11",
-      "@open-wc/testing-karma": "^0.4.7"
-    }
+    "karma": "karma",
+    "test": "karma start"
+  },
+  "dependencies": {
+    "@vaadin/vaadin-button": "^2.2.1",
+    "@vaadin/vaadin-combo-box": "^5.0.9",
+    "@vaadin/vaadin-text-field": "^2.5.3",
+    "lit-element": "^2.0.0"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^0.9.11",
+    "@open-wc/testing-karma": "^0.4.7"
+  }
 }
