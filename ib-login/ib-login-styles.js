@@ -13,7 +13,9 @@ export default css`
   font-family: inherit; }
 
 #conteiner, .fields {
-  margin-top: 45px;
+  margin-left: 280px;
+  margin-right: 280px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,4 +23,9 @@ export default css`
 
 #conteiner {
   margin-top: 15rem; }
+
+#noteuser, #notepassword {
+  font-size: 9px;
+  display: none;
+  color: #00ACEA; }
 `;

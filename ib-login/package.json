@@ -16,6 +16,7 @@
   "dependencies": {
     "@polymer/paper-card": "^3.0.1",
     "@vaadin/vaadin-button": "^2.2.1",
+    "@vaadin/vaadin-dialog": "^2.2.1",
     "@vaadin/vaadin-text-field": "^2.5.3",
     "lit-element": "^2.0.0"
   },
