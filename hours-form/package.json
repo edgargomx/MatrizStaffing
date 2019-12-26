@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^0.9.11",
-    "@open-wc/testing-karma": "^0.4.7"
+    "@open-wc/testing-karma": "^0.4.7",
+    "@polymer/paper-toast": "^3.0.1"
   }
 }

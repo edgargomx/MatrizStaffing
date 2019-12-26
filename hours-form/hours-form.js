@@ -7,7 +7,8 @@ import '@vaadin/vaadin-button/vaadin-button'
 class HoursForm extends LitElement {
   static get properties() {
     return {
-      years:Array
+      years:Array,
+      yearSelected:Number
     };
   }
 
@@ -18,6 +19,7 @@ class HoursForm extends LitElement {
   constructor() {
     super();
     this.years = [];
+    this.yearSelected=null
   }
   firstUpdated(){
     this.fillYears();
@@ -34,8 +36,45 @@ class HoursForm extends LitElement {
       const comboBox= this.shadowRoot.querySelector('vaadin-combo-box');
       comboBox.items = this.years;
       comboBox.selectedItem = this.years[this.years.length-1];
+      this.yearSelected = this.years[this.years.length-1];
      });
 
+  }
+
+  changeYear(event){
+    this.yearSelected=event.target.value;
+      this.dispatchEvent(new CustomEvent('change',{
+        detail:{
+          year:event.target.value
+        }
+      }))
+    
+  }
+  
+  send(){
+    const[janInput,febInput,marInput,aprInput,mayInput,
+      junInput,julInput,augInput,sepInput,octInput,
+      novInput,decInput] = this.shadowRoot.querySelectorAll('vaadin-integer-field');
+    const properties ={
+      year:this.yearSelected,
+      january:janInput.value,
+      february:febInput.value,
+      march:marInput.value,
+      april:aprInput.value,
+      may:mayInput.value,
+      june:junInput.value,
+      july:julInput.value,
+      august:augInput.value,
+      september:sepInput.value,
+      october:octInput.value,
+      november:novInput.value,
+      december:decInput.value
+    }
+
+
+    this.dispatchEvent(new CustomEvent('sendhrs',{
+      detail: properties
+    }))
   }
 
   render() {
@@ -44,61 +83,61 @@ class HoursForm extends LitElement {
       <h2>Agregar horas</h2>
       <div class="col-left">
         <div class="item">
-        <p>Año</p>
-        <vaadin-combo-box></vaadin-combo-box>
+        <span for="year">Año</span>
+        <vaadin-combo-box @change="${this.changeYear}"></vaadin-combo-box>
         </div>
         <div class="item">
-          <p>Enero</p>
-          <vaadin-integer-field min="0" ></vaadin-integer-field>
+          <span>Enero</span>
+          <vaadin-integer-field id="january" min="0" ></vaadin-integer-field>
         </div>
         <div class="item">
-          <p>Febrero</p>
-          <vaadin-integer-field min="0" ></vaadin-integer-field>
+          <span>Febrero</span>
+          <vaadin-integer-field id="february" min="0" ></vaadin-integer-field>
         </div>
         <div class="item">
-          <p>Marzo</p>
-          <vaadin-integer-field min="0" ></vaadin-integer-field>
+          <span>Marzo</span>
+          <vaadin-integer-field id="march" min="0" ></vaadin-integer-field>
         </div>
         <div class="item">
-          <p>Abril</p>
-          <vaadin-integer-field min="0" ></vaadin-integer-field>
+          <span>Abril</span>
+          <vaadin-integer-field id="april" min="0" ></vaadin-integer-field>
         </div>
         <div class="item">
-          <p>Mayo</p>
-          <vaadin-integer-field min="0" ></vaadin-integer-field>
+          <span>Mayo</span>
+          <vaadin-integer-field id="may" min="0" ></vaadin-integer-field>
         </div>
         <div class="item">
-          <p>Junio</p>
-          <vaadin-integer-field min="0" ></vaadin-integer-field>
+          <span>Junio</span>
+          <vaadin-integer-field id="june" min="0" ></vaadin-integer-field>
         </div>
       </div>
       <div class="col-right">
         <div class="item">
-          <p>Julio</p>
-          <vaadin-integer-field min="0"></vaadin-integer-field>
+          <span>Julio</span>
+          <vaadin-integer-field id="july" min="0"></vaadin-integer-field>
         </div>
         <div class="item">
-          <p>Agoto</p>
-          <vaadin-integer-field min="0"></vaadin-integer-field>
+          <span>Agoto</span>
+          <vaadin-integer-field id="august" min="0"></vaadin-integer-field>
         </div>
         <div class="item">
-        <p>Sep.</p>
-          <vaadin-integer-field min="0"></vaadin-integer-field>
+        <span>Sep.</span>
+          <vaadin-integer-field id="september" min="0"></vaadin-integer-field>
         </div>
         <div class="item">
-        <p>Oct.</p>
-          <vaadin-integer-field min="0"></vaadin-integer-field>
+        <span>Oct.</span>
+          <vaadin-integer-field id="october" min="0"></vaadin-integer-field>
         </div>
         <div class="item">
-        <p>Nov.</p>
-          <vaadin-integer-field min="0"></vaadin-integer-field>
+        <span>Nov.</span>
+          <vaadin-integer-field id="november" min="0"></vaadin-integer-field>
         </div>
         <div class="item">
-        <p>Dic.</p>
-          <vaadin-integer-field min="0"></vaadin-integer-field>
+        <span>Dic.</span>
+          <vaadin-integer-field id="december" min="0"></vaadin-integer-field>
         </div>
       </div>
-      <vaadin-button>Guardar</vaadin-button>
+      <vaadin-button @click="${this.send}">Guardar</vaadin-button>
       
     </div>
       `;

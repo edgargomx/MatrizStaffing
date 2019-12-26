@@ -6,10 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="module">
         import '../hours-form.js';
+        import '@polymer/paper-toast/paper-toast.js'
     </script>
     <title>HoursForm</title>
 </head>
 <body>
-        <hours-form></hours-form>
+        <hours-form ></hours-form>
+        <paper-toast ></paper-toast>
+
+        <script>
+            const entry = document.querySelector('hours-form');
+            const toast = document.querySelector('paper-toast');
+            entry.addEventListener('sendhrs', event=>{
+                toast.text=JSON.stringify(event.detail);
+                toast.open();
+            })
+
+            entry.addEventListener('change',event=>{
+                toast.text=JSON.stringify(event.detail);
+                toast.open();
+            })
+            </script>
 </body>
 </html>
