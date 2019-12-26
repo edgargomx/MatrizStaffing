@@ -6,33 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="module">
         import '../hours-table.js';
+        import '@polymer/paper-toast/paper-toast.js';
     </script>
     <title>HoursTable</title>
 </head>
 <body>
     <style>
-        .card {
-                padding: 10px;
-                color: #757575;
-                border-radius: 5px;
-                background-color: #fff;
-                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-            }
-            .circle {
-                display: inline-block;
-                width: 64px;
-                height: 64px;
-                text-align: center;
-                color: #555;
-                border-radius: 50%;
-                background: #ddd;
-                font-size: 30px;
-                line-height: 64px;
-            }
     </style>
-    <div class="card">
-        <div class="circle">1</div>
-        <hours-table></hours-table>
-    </div>
+        <div>
+            <h2>Insertar año</h2>
+            <hours-table id="demo-insert"></hours-table>
+            <input type="text">
+            <button id="insert-year" >Insertar año</button>
+        </div>
+
+        <div>
+            <h2>Seleccionar año</h2>
+            <hours-table id="demo-years"></hours-table>
+            <paper-toast></paper-toast>
+        </div>
+
+        <script>
+            const demoInsert = document.querySelector('#demo-insert');
+            const paperToast = document.querySelector('paper-toast');
+            const demoYearSelected = document.querySelector('#demo-years');
+            const newYear = document.querySelector('input');
+            demoInsert.years = [{
+                year: '2010'}, {
+                year: '2011'
+                },{
+                year: '2012'}]
+            demoYearSelected.years = [{
+                year: '2010'}, {
+                year: '2011'
+                },{
+                year: '2012'}]
+            demoYearSelected.addEventListener('year-selected', event => {
+                paperToast.text = event.detail.year;
+                paperToast.open()
+            })
+
+
+            const injertYear = document.querySelector('button')
+            injertYear.addEventListener('click', () => {
+                demoInsert.years = [...demoInsert.years, {year: newYear.value}]
+            })
+            
+        </script>
 </body>
 </html>
