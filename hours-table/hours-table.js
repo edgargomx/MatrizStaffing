@@ -21,7 +21,7 @@ class HoursTable extends LitElement {
 
   constructor() {
     super();
-    this.url = '/Assets/Horas.png'
+    this.url = '/Assets/Acciones.png'
     this.years = [];
     this.newYear = '';
   }
@@ -33,9 +33,9 @@ class HoursTable extends LitElement {
       const columns = this.shadowRoot.querySelectorAll('vaadin-grid-column');
 
       columns[1].renderer = (root, column, rowData) => {
-        const icon = this.__buildIcon(rowData.item.year)
+        const icon = this.__buildIcon(rowData.item.year);
         if (!root.firstElementChild) {
-          root.appendChild(icon)
+          root.appendChild(icon);
         }
       };
 
@@ -43,7 +43,7 @@ class HoursTable extends LitElement {
     }).then( () => {
       const vaadinButton = this.shadowRoot.querySelector('vaadin-button')
       vaadinButton.addEventListener('click', () => {
-        this.dispatchEvent(new Event('open-form'))
+        this.dispatchEvent(new Event('open-form'));
       })
     })
   }
