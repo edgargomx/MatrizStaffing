@@ -4,7 +4,10 @@ import '@vaadin/vaadin-text-field/vaadin-text-field';
 import '@polymer/paper-card/paper-card.js';
 import '@vaadin/vaadin-button/vaadin-button.js';
 import '@vaadin/vaadin-text-field/vaadin-password-field.js';
-import '@vaadin/vaadin-dialog/vaadin-dialog.js';
+import '@polymer/paper-dialog/paper-dialog.js';
+
+
+
 
 class IbLogin extends LitElement {
   static get properties() {
