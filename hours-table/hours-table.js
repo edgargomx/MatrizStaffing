@@ -9,8 +9,9 @@ import '@vaadin/vaadin-button/vaadin-button.js';
 class HoursTable extends LitElement {
   static get properties() {
     return {
-      years : {
-        type: Object}
+      url: {type: String},
+      years : {type: Array},
+      newYear: {type: Object}
     };
   }
 
@@ -20,46 +21,62 @@ class HoursTable extends LitElement {
 
   constructor() {
     super();
-    this.url = '/Assets/Acciones.png'
+    this.url = '/Assets/Horas.png'
     this.years = [];
+    this.newYear = '';
   }
 
-  renderAll(){
-    (async () => {
-      await customElements.whenDefined('vaadin-grid').then(() => {
+  __renderAll(){
+      customElements.whenDefined('vaadin-grid').then( () => {
       const grid = this.shadowRoot.querySelector('vaadin-grid');
   
       const columns = this.shadowRoot.querySelectorAll('vaadin-grid-column');
 
-      columns[0].renderer = (root, column, rowData) => {
+      columns[1].renderer = (root, column, rowData) => {
+        const icon = this.__buildIcon(rowData.item.year)
         if (!root.firstElementChild) {
-          root.insertAdjacentHTML('afterbegin', `<img alt="action">`)
+          root.appendChild(icon)
         }
-        root.firstElementChild.id = rowData.item.year;
-        root.firstElementChild.src = this.url;
       };
 
       grid.items = this.years
-    })})().then(()=> {
-      const buttons = this.shadowRoot.querySelectorAll('img')
-      for(const button of buttons){
-        button.addEventListener('click', event => {
-          this.dispatchEvent(new CustomEvent('year-selected',
-          {detail: {year: event.currentTarget.id}})) 
-        })
-      }
+    }).then( () => {
+      const vaadinButton = this.shadowRoot.querySelector('vaadin-button')
+      vaadinButton.addEventListener('click', () => {
+        this.dispatchEvent(new Event('open-form'))
+      })
     })
   }
+
+  __buildIcon(id){
+    const icon = document.createElement('img');
+    icon.src = this.url;
+    icon.alt = this.url;
+    icon.id = id
+    icon.addEventListener('click', event => {
+      this.dispatchEvent(new CustomEvent('year-selected',
+      {detail: {year: event.currentTarget.id}})) 
+    })
+
+    return icon
+  }
+
+  addNewYear(newYear){
+    this.years = [...this.years, {year: newYear}]
+    this.__renderAll();
+  }
+
   updated() {
-    this.renderAll();
-}
+    this.__renderAll();
+  }
 
   render() {
     return html`
         <vaadin-grid theme="row-dividers" column-reordering-allowed multi-sort>
-            <vaadin-grid-sort-column width="9em" path="year" header="Año"></vaadin-grid-sort-column>
-            <vaadin-grid-column width="9em" header="Acciones"></vaadin-grid-sort-column>
+            <vaadin-grid-column width="9em" path="year" header="Año"></vaadin-grid-column>
+            <vaadin-grid-column width="9em" header="Acciones"></vaadin-grid-column>
         </vaadin-grid>
+        <vaadin-button theme="primary">Registrar</vaadin-button>
       `;
     }
 }

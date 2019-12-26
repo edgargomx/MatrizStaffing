@@ -16,21 +16,32 @@
         <div>
             <h2>Insertar año</h2>
             <hours-table id="demo-insert"></hours-table>
-            <input type="text">
+            <input id="first-year" type="text">
             <button id="insert-year" >Insertar año</button>
         </div>
 
         <div>
-            <h2>Seleccionar año</h2>
+            <h2>Seleccionar año y abrir formulario</h2>
             <hours-table id="demo-years"></hours-table>
-            <paper-toast></paper-toast>
+            <paper-toast id="toast-years"></paper-toast>
+        </div>
+
+        <div>
+            <h2>Nuevo año y evento</h2>
+            <hours-table id="demo-two"></hours-table>
+            <input id="second-year" type="text">
+            <button id="second-year-button">Insertar año</button>
+            <paper-toast id="toast-two"></paper-toast>
         </div>
 
         <script>
             const demoInsert = document.querySelector('#demo-insert');
-            const paperToast = document.querySelector('paper-toast');
+            const paperToastYears = document.querySelector('#toast-years');
+            const paperToastTwo = document.querySelector('#toast-two')
             const demoYearSelected = document.querySelector('#demo-years');
-            const newYear = document.querySelector('input');
+            const demoOfTwo = document.querySelector('#demo-two');
+            const firstNewYear = document.querySelector('#first-year');
+            const secondNewYear = document.querySelector('#second-year');
             demoInsert.years = [{
                 year: '2010'}, {
                 year: '2011'
@@ -41,16 +52,35 @@
                 year: '2011'
                 },{
                 year: '2012'}]
+                demoOfTwo.years = [{
+                year: '2010'}, {
+                year: '2011'
+                },{
+                year: '2012'}]
             demoYearSelected.addEventListener('year-selected', event => {
-                paperToast.text = event.detail.year;
-                paperToast.open()
+                paperToastYears.text = event.detail.year;
+                paperToastYears.open()
             })
 
-
-            const injertYear = document.querySelector('button')
-            injertYear.addEventListener('click', () => {
-                demoInsert.years = [...demoInsert.years, {year: newYear.value}]
+            demoYearSelected.addEventListener('open-form', event => {
+                paperToastYears.text = 'Abrir formulario';
+                paperToastYears.open()
             })
+
+            demoOfTwo.addEventListener('year-selected', event => {
+                paperToastTwo.text = event.detail.year;
+                paperToastTwo.open()
+            } )
+            const insertYear = document.querySelector('#insert-year')
+            insertYear.addEventListener('click', () => {
+                demoInsert.years = [...demoInsert.years, {year: firstNewYear.value}]
+            })
+
+            const insertSecondYear = document.querySelector('#second-year-button')
+            insertSecondYear.addEventListener('click', () => {
+                demoOfTwo.addNewYear(secondNewYear.value)
+            })
+            
             
         </script>
 </body>
