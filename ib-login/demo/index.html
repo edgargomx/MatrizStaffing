@@ -13,29 +13,28 @@
     <style>
     </style>
     <div >
-        <ib-login id="demo1"  user ="" password ="" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacio, es un campo obligatorio debe ser llenado para ingresar" noteuser="El campo usuario esta vacio, es un campo obligatorio debe ser llenado para ingresar"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
+        <ib-login id="demo1"  user ="" password ="" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacío, dato obligatorio" noteuser="El campo usuario esta vacío, Dato obligatorio"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
     </div>
     <div >
-        <ib-login id="demo2" user="Erick" password ="123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacio, es un campo obligatorio debe ser llenado para ingresar" noteuser="El campo usuario esta vacio, es un campo obligatorio debe ser llenado para ingresar"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
+        <ib-login id="demo2" user="Erick" password ="123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacío, dato obligatorio" noteuser="El campo usuario esta vacío, dato obligatorio"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
     </div>
     <div >
-        <ib-login id="demo3" user ="Edgar" password="123123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacio, es un campo obligatorio debe ser llenado para ingresar" noteuser="El campo usuario esta vacio, es un campo obligatorio debe ser llenado para ingresar"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
-    </div>
-
-    <div >
-        <ib-login id="demo4" user ="Erick.Serrato@ironbit.com.mx" password="123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacio, es un campo obligatorio debe ser llenado para ingresar" noteuser="El campo usuario esta vacio, es un campo obligatorio debe ser llenado para ingresar"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
+        <ib-login id="demo3" user ="Edgar" password="123123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacío, dato obligatorio" noteuser="El campo usuario esta vacío, dato obligatorio"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
     </div>
 
     <div >
-        <ib-login id="demo5" user ="Edgar@asdasad" password="123123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacio, es un campo obligatorio debe ser llenado para ingresar" noteuser="El campo usuario esta vacio, es un campo obligatorio debe ser llenado para ingresar"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
+        <ib-login id="demo4" user ="Erick.Serrato@ironbit.com.mx" password="123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacío, dato obligatorio" noteuser="El campo usuario esta vacío, dato obligatorio"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
+    </div>
+
+    <div >
+        <ib-login id="demo5" user ="Edgar@asdasad" password="123123" server ="https://dicss.com.mx/multidesarrollo/post.php" notePassword="El campo password esta vacío, dato obligatorio" noteuser="El campo usuario esta vacío, dato obligatorio"  textButton="Iniciar Sesión" userNameHolder ="Elena Torres" passwordHolder = "xxxxxxx" logo="../image/LogoIB.png" ></ib-login>
     </div>
     <script>
         document.querySelector('#demo1').addEventListener('send-user-ib',event => {
             if(event.detail){
                 alert('Bienvenido');
             }else{
-                alert('No existe el usuario');
-
+                alert('El nombre de usuario o contraseña es incorrecto');
             }
         });
         document.querySelector('#demo2').addEventListener('send-user-ib',event => {

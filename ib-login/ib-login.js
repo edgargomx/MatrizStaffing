@@ -73,8 +73,10 @@ class IbLogin extends LitElement {
       })
       .then(res => res.json())
       .then( data => {
-        userIronNode.value = '';
-        passwordIronNode.value = '';
+        if(data == true){
+          userIronNode.value = '';
+          passwordIronNode.value = '';
+        }
         this.dispatchEvent( new CustomEvent('send-user-ib',{
           detail: data
         }));
