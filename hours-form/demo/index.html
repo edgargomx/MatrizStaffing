@@ -16,16 +16,38 @@
     </style>
 </head>
 <body>
-        <hours-form></hours-form>
-        <paper-toast ></paper-toast>
-        
-        <script>
-            const yearCollection = {
-                '2020' : {
-                    january:'2000',
-                    february:'2000',
-                    march:'2000',
-                    april:'2000',
+
+    <div>
+        <h2>Save data</h2>
+        <hours-form id=""></hours-form>
+        <paper-toast id=""></paper-toast>
+    </div>
+
+    <div>
+        <h2>Edit data</h2>
+        <hours-form id=""></hours-form>
+        <paper-toast id=""></paper-toast>
+    </div>
+
+    <div>
+        <h2>Select data (Edit)</h2>
+        <hours-form id=""></hours-form>
+        <paper-toast id=""></paper-toast>
+    </div>
+
+    <div>
+        <h2>Select data (Create)</h2>
+        <hours-form id=""></hours-form>
+        <paper-toast id=""></paper-toast>
+    </div>
+    
+    <script>
+        const yearCollection = {
+            '2020' : {
+                january:'2000',
+                february:'2000',
+                march:'2000',
+                april:'2000',
                     may:'2000',
                     june:'2000',
                     july:'2000',
@@ -62,27 +84,23 @@
                     december:'2000'
                 }
             }
-            const entry = document.querySelector('hours-form');
-            const toast = document.querySelector('paper-toast');
-            entry.addEventListener('edited', event=>{
-                toast.text=JSON.stringify(event.detail);
-                toast.open();
-                console.log('edited');
-            })
-            entry.addEventListener('created', event=>{
-                toast.text=JSON.stringify(event.detail);
-                toast.open();
-                console.log('created')
-            })
-            entry.addEventListener('change', event=>{
-                toast.text=JSON.stringify(event.detail.year);
+        
+        let arrayOfYears = [];
+        //Add data procesor: Receive object with data and return an array and a property object
+        const hoursForms = document.querySelectorAll('hours-form');
 
-                entry.set(yearCollection[event.detail.year]);
-                entry.edit(event.detail.year);
-                
-
-                toast.open();
+        for(const year in yearCollection){
+            arrayOfYears = [...arrayOfYears, parseInt(year)]
+        }
+        for(const form of hoursForms){
+            customElements.whenDefined(form.localName).then(() => {
+                form.fillYears(arrayOfYears);
+                form.addEventListener('years-changed', event => {
+                    form.set(yearCollection[event.detail.year]);
+                })
             })
-            </script>
+        }
+
+    </script>
 </body>
 </html>

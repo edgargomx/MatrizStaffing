@@ -33,25 +33,13 @@ class HoursForm extends LitElement {
     this.title = '';
     this.eventName = '';
   }
-  firstUpdated(){
-    this.fillYears();
-  }
 
-
-  fillYears(){
-   let countYear=2018;
-   this.years= Array.from({
-      length:(new Date().getFullYear()-countYear)+3
-    },
-    ()=>countYear++
-    ); 
+  fillYears(years){
+    this.years = years;
     customElements.whenDefined('vaadin-combo-box').then(()=>{
       const comboBox= this.shadowRoot.querySelector('vaadin-combo-box');
       comboBox.items = this.years;
-      comboBox.selectedItem = this.years[this.years.length-3];
-      this.yearSelected = this.years[this.years.length-1];
      });
-
   }
 
   edit(year){
@@ -94,7 +82,7 @@ class HoursForm extends LitElement {
     for(const month of integerField){
       month.value = '';
     }
-      this.dispatchEvent(new CustomEvent('change',{
+      this.dispatchEvent(new CustomEvent('years-changed',{
         detail:{
           year:event.target.value
         }
@@ -155,7 +143,7 @@ class HoursForm extends LitElement {
             <div class="col">
               <div class="row">
                 <label>Año: </label>
-                <vaadin-combo-box @change="${this.changeYear}" theme="custom-border"></vaadin-combo-box>
+                <vaadin-combo-box @change="${this.changeYear}" placeholder="Escoja un año" theme="custom-border"></vaadin-combo-box>
               </div>
               <div class="row margin-top-sm">
                 <label>Enero:</label>
