@@ -5,6 +5,7 @@ import '@vaadin/vaadin-grid/vaadin-grid-column';
 import '@vaadin/vaadin-grid/vaadin-grid-selection-column';
 import '@vaadin/vaadin-grid/vaadin-grid-sort-column';
 import '@vaadin/vaadin-button/vaadin-button.js';
+import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles';
 
 class HoursTable extends LitElement {
   static get properties() {
@@ -76,13 +77,33 @@ class HoursTable extends LitElement {
 
   render() {
     return html`
-        <vaadin-grid theme="row-dividers" column-reordering-allowed multi-sort>
-            <vaadin-grid-column width="9em" path="year" header="Año"></vaadin-grid-column>
-            <vaadin-grid-column width="9em" header="Acciones"></vaadin-grid-column>
-        </vaadin-grid>
-        <vaadin-button theme="primary">Registrar</vaadin-button>
+        <div class="col content-center">
+          <vaadin-grid theme="row-stripes" column-reordering-allowed multi-sort>
+              <vaadin-grid-column width="9em" path="year" header="Año"></vaadin-grid-column>
+              <vaadin-grid-column width="9em" header="Acciones"></vaadin-grid-column>
+          </vaadin-grid>
+          <vaadin-button theme="primary" class="margin-top-md">Registro</vaadin-button>
+        </div>
       `;
     }
 }
+
+registerStyles('vaadin-grid', css`
+  :host([theme~="row-stripes"])
+      [part="row"]:last-child [part~="header-cell"] {
+        background: var(--background-gradient);
+        color: white;
+      }
+      [part~="cell"] {
+        text-align: center;
+      }
+`);
+
+registerStyles('vaadin-button', css`
+  :host([theme~="primary"]) {
+        background: var(--background-gradient);
+        border-radius: 30px
+      }
+`);
 
 window.customElements.define("hours-table", HoursTable);
