@@ -5,9 +5,7 @@ import '@polymer/paper-card/paper-card.js';
 import '@vaadin/vaadin-button/vaadin-button.js';
 import '@vaadin/vaadin-text-field/vaadin-password-field.js';
 import '@polymer/paper-dialog/paper-dialog.js';
-
-
-
+import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles';
 
 class IbLogin extends LitElement {
   static get properties() {
@@ -43,19 +41,17 @@ class IbLogin extends LitElement {
 
   render() {   
     return html`
-    <div id ="conteiner">
-        <paper-card image="${this.logo}" > </paper-card>
-        <div class = "fields">
-          <vaadin-text-field placeholder="${this.userNameHolder}" id="userIron" value ="${this.user}"></vaadin-text-field>
-            <div id="noteuser">
-              <p>${this.noteUser} </p>
-            </div>
-          <vaadin-password-field placeholder="${this.passwordHolder}"  id="passwordIron" value="${this.password}"></vaadin-password-field>
-            <div id="notepassword">
-              <p> ${this.notePassword}</p>
-            </div> 
-          <vaadin-button theme="primary" @click="${this.sendUser}">${this.textButton}</vaadin-button>
-        </div>
+    <div class="col content-center">
+        <paper-card image="${this.logo}" class="margin-bottom-md"> </paper-card>
+        <vaadin-text-field placeholder="${this.userNameHolder}" id="userIron" value ="${this.user}"></vaadin-text-field>
+          <div id="noteuser">
+            <p>${this.noteUser} </p>
+          </div>
+        <vaadin-password-field placeholder="${this.passwordHolder}"  id="passwordIron" value="${this.password}"></vaadin-password-field>
+          <div id="notepassword">
+            <p> ${this.notePassword}</p>
+          </div> 
+        <vaadin-button theme="primary" @click="${this.sendUser}" class="margin-top-md">${this.textButton}</vaadin-button>
     </div>
       `; 
     }
@@ -139,5 +135,13 @@ class IbLogin extends LitElement {
     return this.shadowRoot.querySelector(query);
   }   
 }
+
+registerStyles('vaadin-button', css`
+  :host([theme~="primary"]) {
+        background: var(--background-gradient);
+        border-radius: 30px;
+        font-size: var(--font-size-button);
+      }
+`);
 
 window.customElements.define("ib-login", IbLogin);
