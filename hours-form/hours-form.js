@@ -16,7 +16,8 @@ class HoursForm extends LitElement {
   static get properties() {
     return {
       years:Array,
-      yearSelected:Number
+      yearSelected:Number,
+      title:String
     };
   }
 
@@ -28,6 +29,7 @@ class HoursForm extends LitElement {
     super();
     this.years = [];
     this.yearSelected=null;
+    this.title = '';
   }
   firstUpdated(){
     this.fillYears();
@@ -53,22 +55,29 @@ class HoursForm extends LitElement {
   edit(year){
     this.title = 'Editar los años';
     this.validateForEdit(year);
-    //Sólo pueden editarse los años mayores al actual y el año actual. Validar
   }
 
   create(year){
     this.title = 'Crear nuevo año';
-    this.validateForCreate();
-    //Revisar que el nuevo año no se repita en los anteriore
+    this.validateForCreate(year);
   }
 
+  validateForCreate(year){
+    if(this.years.indexOf(year) === -1){
+      this.validateForEdit(year);
+    } else {
+      console.error('Year previously defined')
+    }
+  }
   validateForEdit(year){
     const textFields= this.shadowRoot.querySelectorAll('vaadin-integer-field');
     if(year>=new Date().getFullYear()){
+      this.shadowRoot.querySelector('vaadin-button').disabled=false;
       for(const itr of textFields){
         itr.disabled=false;
       }
     }else{
+      this.shadowRoot.querySelector('vaadin-button').disabled=true;
       for(const itr of textFields){
         itr.disabled=true;
       }
@@ -77,6 +86,10 @@ class HoursForm extends LitElement {
 
   changeYear(event){
     this.yearSelected=event.target.value;
+    const integerField = this.shadowRoot.querySelectorAll('vaadin-integer-field')
+    for(const month of integerField){
+      month.value = '';
+    }
       this.dispatchEvent(new CustomEvent('change',{
         detail:{
           year:event.target.value
@@ -133,7 +146,7 @@ class HoursForm extends LitElement {
   render() {
     return html`
         <div class="col ">
-          <h2 class="center-item">Agregar horas</h2>
+          <h2 class="center-item">${this.title}</h2>
           <div class="row content-center">
             <div class="col">
               <div class="row">
