@@ -45,8 +45,8 @@ class HoursForm extends LitElement {
     },
     ()=>countYear++
     ); 
-    customElements.whenDefined('vaadin-combo-box').then(()=>{
-      const comboBox= this.shadowRoot.querySelector('vaadin-combo-box');
+    customElements.whenDefined('#year').then(()=>{
+      const comboBox= this.shadowRoot.querySelector('#year');
       comboBox.items = this.years;
       comboBox.selectedItem = this.years[this.years.length-3];
       this.yearSelected = this.years[this.years.length-1];
@@ -74,7 +74,7 @@ class HoursForm extends LitElement {
     }
   }
   validateForEdit(year){
-    const textFields= this.shadowRoot.querySelectorAll('vaadin-integer-field');
+    const textFields= this.shadowRoot.querySelectorAll('.month');
     if(year>=new Date().getFullYear()){
       this.shadowRoot.querySelector('vaadin-button').disabled=false;
       for(const itr of textFields){
@@ -90,23 +90,23 @@ class HoursForm extends LitElement {
 
   changeYear(event){
     this.yearSelected=event.target.value;
-    const integerField = this.shadowRoot.querySelectorAll('vaadin-integer-field')
+    const integerField = this.shadowRoot.querySelectorAll('.month')
     for(const month of integerField){
       month.value = '';
     }
       this.dispatchEvent(new CustomEvent('change',{
         detail:{
-          year:event.target.value
+          year:event.target.value 
         }
       }))
     
   }
   set(year){
-    const integerField = this.shadowRoot.querySelectorAll('vaadin-integer-field')
+    const integerField = this.shadowRoot.querySelectorAll('.month')
     for(const month of integerField){
       month.value = year[month.id]
     }
-    const comboBox = this.shadowRoot.querySelector('vaadin-combo-box')
+    const comboBox = this.shadowRoot.querySelector('#year')
     comboBox.selectedItem=this.yearSelected;
 
   }
@@ -124,7 +124,7 @@ class HoursForm extends LitElement {
         sepInput,
         octInput,
         novInput,
-        decInput ] = this.shadowRoot.querySelectorAll('vaadin-integer-field');
+        decInput ] = this.shadowRoot.querySelectorAll('.month');
 
     const properties = {
       year     :this.yearSelected,
@@ -155,57 +155,57 @@ class HoursForm extends LitElement {
             <div class="col">
               <div class="row">
                 <label>Año: </label>
-                <vaadin-combo-box @change="${this.changeYear}" theme="custom-border"></vaadin-combo-box>
+                <vaadin-integer-field @change="${this.changeYear}" theme="custom-border" id="year" min="2000"></vaadin-integer-field>
               </div>
               <div class="row margin-top-sm">
                 <label>Enero:</label>
-                <vaadin-integer-field id="january" min="0" ></vaadin-integer-field>
+                <vaadin-integer-field id="january" min="0" class="month" ></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Febrero:</label>
-                <vaadin-integer-field id="february" min="0" ></vaadin-integer-field>
+                <vaadin-integer-field id="february" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Marzo:</label>
-                <vaadin-integer-field id="march" min="0" ></vaadin-integer-field>
+                <vaadin-integer-field id="march" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Abril:</label>
-                <vaadin-integer-field id="april" min="0" ></vaadin-integer-field>
+                <vaadin-integer-field id="april" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Mayo:</label>
-                <vaadin-integer-field id="may" min="0" ></vaadin-integer-field>
+                <vaadin-integer-field id="may" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row">
                 <label>Junio:</label>
-                <vaadin-integer-field id="june" min="0" ></vaadin-integer-field>
+                <vaadin-integer-field id="june" min="0" class="month"></vaadin-integer-field>
               </div>
             </div>
             <div class="col">
               <div class="row margin-top-lg">
                 <label>Julio:</label>
-                <vaadin-integer-field id="july" min="0"></vaadin-integer-field>
+                <vaadin-integer-field id="july" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Agosto:</label>
-                <vaadin-integer-field id="august" min="0"></vaadin-integer-field>
+                <vaadin-integer-field id="august" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Sep:</label>
-                <vaadin-integer-field id="september" min="0"></vaadin-integer-field>
+                <vaadin-integer-field id="september" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Oct:</label>
-                <vaadin-integer-field id="october" min="0"></vaadin-integer-field>
+                <vaadin-integer-field id="october" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Nov:</label>
-                <vaadin-integer-field id="november" min="0"></vaadin-integer-field>
+                <vaadin-integer-field id="november" min="0" class="month"></vaadin-integer-field>
               </div>
               <div class="row ">
                 <label>Dic:</label>
-                <vaadin-integer-field id="december" min="0"></vaadin-integer-field>
+                <vaadin-integer-field id="december" min="0" class="month"></vaadin-integer-field>
               </div>
             </div>
           </div>
