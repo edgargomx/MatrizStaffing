@@ -20,82 +20,80 @@
     <div id="save-div">
         <h2>Save data</h2>
         <hours-form id="hours-form-save"></hours-form>
-        <paper-toast id="toast-save"></paper-toast>
+        <button onclick="startForCreate()">Start for create</button>
     </div>
 
     <div id="edit-div">
         <h2>Edit data</h2>
         <hours-form id="hours-form-edit"></hours-form>
-        <paper-toast id="toast-edit"></paper-toast>
+        <button onclick="startForEdit()">Start for edit</button>
     </div>
 
     <div id="select-for-edit">
         <h2>Select data (Edit)</h2>
         <hours-form id="hours-form-select-edit"></hours-form>
-        <paper-toast id="toast-select-edit"></paper-toast>
     </div>
 
     <div id="select-for-create">
         <h2>Select data (Create)</h2>
         <hours-form id="hours-form-select-create"></hours-form>
-        <paper-toast id="toast-select-create"></paper-toast>
         
     </div>
     
     <script>
         const yearCollection = {
             '2020' : {
-                january:'2000',
-                february:'2000',
-                march:'2000',
-                april:'2000',
-                    may:'2000',
-                    june:'2000',
-                    july:'2000',
-                    august:'2000',
-                    september:'2000',
-                    october:'2000',
-                    november:'2000',
-                    december:'2000'
+                january:'220',
+                february:'220',
+                march:'220',
+                april:'220',
+                    may:'220',
+                    june:'220',
+                    july:'220',
+                    august:'220',
+                    september:'220',
+                    october:'220',
+                    november:'220',
+                    december:'220'
                 },'2019' : {
-                    january:'2000',
-                    february:'2000',
-                    march:'2000',
-                    april:'2000',
-                    may:'2000',
-                    june:'2000',
-                    july:'2000',
-                    august:'2000',
-                    september:'2000',
-                    october:'2000',
-                    november:'2000',
-                    december:'2000'
+                    january:'219',
+                    february:'219',
+                    march:'219',
+                    april:'219',
+                    may:'219',
+                    june:'219',
+                    july:'219',
+                    august:'219',
+                    september:'219',
+                    october:'219',
+                    november:'219',
+                    december:'219'
                 },'2018' : {
-                    january:'2000',
-                    february:'2000',
-                    march:'2000',
-                    april:'2000',
-                    may:'2000',
-                    june:'2000',
-                    july:'2000',
-                    august:'2000',
-                    september:'2000',
-                    october:'2000',
-                    november:'2000',
-                    december:'2000'
+                    january:'218',
+                    february:'218',
+                    march:'218',
+                    april:'218',
+                    may:'218',
+                    june:'218',
+                    july:'218',
+                    august:'218',
+                    september:'218',
+                    october:'218',
+                    november:'218',
+                    december:'218'
                 }, '2021' : {
-                    january:'2000',
-                    february:'2000',
-                    march:'2000',
-                    april:'2000',
-                    may:'2000',
-                    june:'2000',
-                    july:'2000',
-                    august:'2000',
-                    september:'2000',
-                    october:'2000',
-                    november:'2000',
-                    december:'2000'
+                    january:'221',
+                    february:'221',
+                    march:'221',
+                    april:'221',
+                    may:'221',
+                    june:'221',
+                    july:'221',
+                    august:'221',
+                    september:'221',
+                    october:'221',
+                    november:'221',
+                    december:'221'
                 }
             }
         
@@ -111,7 +109,7 @@
         for(const year in yearCollection){
             arrayOfYears = [...arrayOfYears, parseInt(year)]
             for(const div of divs){
-                div.insertAdjacentHTML('beforeend', `<button value="${parseInt(year)}">${parseInt(year)}</button>`)
+                div.insertAdjacentHTML('beforeend', `<button class="years-class" value="${parseInt(year)}">${parseInt(year)}</button>`)
             }
         }
         
@@ -119,19 +117,26 @@
             customElements.whenDefined(form.localName).then(() => {
                 form.fillYears(arrayOfYears);
                 form.addEventListener('years-changed', event => {
-                    form.set(yearCollection[event.detail.year]);
+                    form.set(event.detail.year, yearCollection[event.detail.year]);
                 })
-            }).then(() => {
-                const allButtons = document.querySelectorAll('button')
-                for(const button of allButtons){
-                    button.addEventListener('click', event => {
-                        console.log(event.currentTarget.value)
-                    })
-                }
             })
         }
-
-        document.querySelector('#save-div')
+        
+        const firstForm = document.querySelector('#hours-form-save');
+        const startForCreate = () => {
+            firstForm.create();
+        }
+        const secondForm = document.querySelector('#hours-form-edit');
+        const startForEdit = () => {
+            secondForm.edit();
+        }
+        const allButtons = document.querySelectorAll('.years-class')
+            for(const button of allButtons){
+                button.addEventListener('click', event => {
+                    const hoursForm = event.currentTarget.parentElement.querySelector('hours-form')
+                    hoursForm.set(event.currentTarget.value ,yearCollection[event.currentTarget.value])
+                })
+            }
     </script>
 </body>
 </html>

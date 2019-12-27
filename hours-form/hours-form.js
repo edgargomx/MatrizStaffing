@@ -32,22 +32,37 @@ class HoursForm extends LitElement {
     this.yearSelected=null;
     this.title = '';
     this.eventName = '';
+    this.monthsName = ["january", "february", "march", "april", "may", "june",
+    "july", "august", "september", "october", "november", "december"];
+  }
+
+  firstUpdated() {
+    const fields = this.shadowRoot.querySelectorAll('.month');
+
+    for(const field of fields){
+      customElements.whenDefined(field.localName).then(()=> {
+        field.addEventListener('input', ()=> {
+          field.value > 999 ? field.value = 999: field.value
+          field.value < 0 ? field.value = 0: field.value
+        });
+      })
+    }
   }
 
   fillYears(years){
     this.years = years;
   }
 
-  edit(year){
+  edit(){
     this.title = 'Editar los años';
     this.eventName = 'edited'
-    this.validateForEdit(year);
+    this.validateForEdit(this.yearSelected);
   }
 
-  create(year){
+  create(){
     this.title = 'Crear nuevo año';
     this.eventName = 'created'
-    this.validateForCreate(year);
+    this.validateForCreate(this.yearSelected);
   }
 
   validateForCreate(year){
@@ -57,13 +72,28 @@ class HoursForm extends LitElement {
       console.error('Year previously defined')
     }
   }
+
+  validateMonths(textFields){
+    const date = new Date();
+    const currentMonth = this.monthsName[date.getMonth()];
+    for(let i = 0; i < 12; i++){
+      if(textFields[i].id !== currentMonth ){
+        textFields[i].disabled = true;
+      } else {
+        textFields[i].disabled = true;
+        i = 12;
+      }
+    }
+  }
   validateForEdit(year){
     const textFields= this.shadowRoot.querySelectorAll('.month');
     if(year>=new Date().getFullYear()){
-      this.shadowRoot.querySelector('vaadin-button').disabled=false;
       for(const itr of textFields){
         itr.disabled=false;
-      }
+      };
+      if(parseInt(year) === new Date().getFullYear()){
+        this.validateMonths(textFields);
+      };
     }else{
       this.shadowRoot.querySelector('vaadin-button').disabled=true;
       for(const itr of textFields){
@@ -74,7 +104,9 @@ class HoursForm extends LitElement {
 
   changeYear(event){
     this.yearSelected=event.target.value;
-    this.validateForEdit(this.yearSelected)
+    if(this.years.indexOf(this.yearSelected) !== -1){
+      this.validateForEdit(this.yearSelected);
+    }
     const integerField = this.shadowRoot.querySelectorAll('.month')
     for(const month of integerField){
       month.value = '';
@@ -86,18 +118,21 @@ class HoursForm extends LitElement {
       }))
     
   }
-  set(year){
-    const integerField = this.shadowRoot.querySelectorAll('.month')
-    for(const month of integerField){
-      month.value = year[month.id]
+  set(year, hours){
+    const integerField = this.shadowRoot.querySelectorAll('.month');
+    this.yearSelected = year;
+    
+    if(hours){
+      for(const month of integerField){
+        month.value = hours[month.id];
+      }
+      this.validateForEdit(year);
+      const vaadinYear = this.shadowRoot.querySelector('#year');
+      vaadinYear.value = year;
     }
-    const comboBox = this.shadowRoot.querySelector('#year')
-    comboBox.selectedItem=this.yearSelected;
-
   }
   
   send(){
-    console.log('estoy salvando')
     const [
         janInput,
         febInput,
