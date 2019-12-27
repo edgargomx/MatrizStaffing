@@ -17,28 +17,29 @@
 </head>
 <body>
 
-    <div>
+    <div id="save-div">
         <h2>Save data</h2>
-        <hours-form id=""></hours-form>
-        <paper-toast id=""></paper-toast>
+        <hours-form id="hours-form-save"></hours-form>
+        <paper-toast id="toast-save"></paper-toast>
     </div>
 
-    <div>
+    <div id="edit-div">
         <h2>Edit data</h2>
-        <hours-form id=""></hours-form>
-        <paper-toast id=""></paper-toast>
+        <hours-form id="hours-form-edit"></hours-form>
+        <paper-toast id="toast-edit"></paper-toast>
     </div>
 
-    <div>
+    <div id="select-for-edit">
         <h2>Select data (Edit)</h2>
-        <hours-form id=""></hours-form>
-        <paper-toast id=""></paper-toast>
+        <hours-form id="hours-form-select-edit"></hours-form>
+        <paper-toast id="toast-select-edit"></paper-toast>
     </div>
 
-    <div>
+    <div id="select-for-create">
         <h2>Select data (Create)</h2>
-        <hours-form id=""></hours-form>
-        <paper-toast id=""></paper-toast>
+        <hours-form id="hours-form-select-create"></hours-form>
+        <paper-toast id="toast-select-create"></paper-toast>
+        
     </div>
     
     <script>
@@ -82,25 +83,55 @@
                     october:'2000',
                     november:'2000',
                     december:'2000'
+                }, '2021' : {
+                    january:'2000',
+                    february:'2000',
+                    march:'2000',
+                    april:'2000',
+                    may:'2000',
+                    june:'2000',
+                    july:'2000',
+                    august:'2000',
+                    september:'2000',
+                    october:'2000',
+                    november:'2000',
+                    december:'2000'
                 }
             }
         
         let arrayOfYears = [];
         //Add data procesor: Receive object with data and return an array and a property object
         const hoursForms = document.querySelectorAll('hours-form');
-
+        const divs = [
+            document.querySelector('#save-div'),
+            document.querySelector('#edit-div'),
+            document.querySelector('#select-for-edit'),
+            document.querySelector('#select-for-create')
+        ]
         for(const year in yearCollection){
             arrayOfYears = [...arrayOfYears, parseInt(year)]
+            for(const div of divs){
+                div.insertAdjacentHTML('beforeend', `<button value="${parseInt(year)}">${parseInt(year)}</button>`)
+            }
         }
+        
         for(const form of hoursForms){
             customElements.whenDefined(form.localName).then(() => {
                 form.fillYears(arrayOfYears);
                 form.addEventListener('years-changed', event => {
                     form.set(yearCollection[event.detail.year]);
                 })
+            }).then(() => {
+                const allButtons = document.querySelectorAll('button')
+                for(const button of allButtons){
+                    button.addEventListener('click', event => {
+                        console.log(event.currentTarget.value)
+                    })
+                }
             })
         }
 
+        document.querySelector('#save-div')
     </script>
 </body>
 </html>

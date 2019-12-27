@@ -36,10 +36,6 @@ class HoursForm extends LitElement {
 
   fillYears(years){
     this.years = years;
-    customElements.whenDefined('vaadin-combo-box').then(()=>{
-      const comboBox= this.shadowRoot.querySelector('vaadin-combo-box');
-      comboBox.items = this.years;
-     });
   }
 
   edit(year){
@@ -78,6 +74,7 @@ class HoursForm extends LitElement {
 
   changeYear(event){
     this.yearSelected=event.target.value;
+    this.validateForEdit(this.yearSelected)
     const integerField = this.shadowRoot.querySelectorAll('.month')
     for(const month of integerField){
       month.value = '';
@@ -100,6 +97,7 @@ class HoursForm extends LitElement {
   }
   
   send(){
+    console.log('estoy salvando')
     const [
         janInput,
         febInput,
