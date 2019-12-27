@@ -17,7 +17,8 @@ class HoursForm extends LitElement {
     return {
       years:Array,
       yearSelected:Number,
-      title:String
+      title:String,
+      eventName:String
     };
   }
 
@@ -30,6 +31,7 @@ class HoursForm extends LitElement {
     this.years = [];
     this.yearSelected=null;
     this.title = '';
+    this.eventName = '';
   }
   firstUpdated(){
     this.fillYears();
@@ -54,11 +56,13 @@ class HoursForm extends LitElement {
 
   edit(year){
     this.title = 'Editar los años';
+    this.eventName = 'edited'
     this.validateForEdit(year);
   }
 
   create(year){
     this.title = 'Crear nuevo año';
+    this.eventName = 'created'
     this.validateForCreate(year);
   }
 
@@ -138,7 +142,7 @@ class HoursForm extends LitElement {
       december :decInput.value
     }
 
-    this.dispatchEvent(new CustomEvent('sendhrs',{
+    this.dispatchEvent(new CustomEvent(this.eventName,{
       detail: properties
     }))
   }

@@ -64,11 +64,16 @@
             }
             const entry = document.querySelector('hours-form');
             const toast = document.querySelector('paper-toast');
-            entry.addEventListener('sendhrs', event=>{
+            entry.addEventListener('edited', event=>{
                 toast.text=JSON.stringify(event.detail);
                 toast.open();
+                console.log('edited');
             })
-
+            entry.addEventListener('created', event=>{
+                toast.text=JSON.stringify(event.detail);
+                toast.open();
+                console.log('created')
+            })
             entry.addEventListener('change', event=>{
                 toast.text=JSON.stringify(event.detail.year);
 
