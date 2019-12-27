@@ -7,6 +7,7 @@
     <script type="module">
         import '../hours-form.js';
         import '@polymer/paper-toast/paper-toast.js'
+
     </script>
     <title>HoursForm</title>
     <style>
@@ -20,6 +21,48 @@
         <paper-toast ></paper-toast>
 
         <script>
+            const yearCollection = {
+                '2020' : {
+                    january:'2000',
+                    february:'2000',
+                    march:'2000',
+                    april:'2000',
+                    may:'2000',
+                    june:'2000',
+                    july:'2000',
+                    august:'2000',
+                    september:'2000',
+                    october:'2000',
+                    november:'2000',
+                    december:'2000'
+                },'2019' : {
+                    january:'2000',
+                    february:'2000',
+                    march:'2000',
+                    april:'2000',
+                    may:'2000',
+                    june:'2000',
+                    july:'2000',
+                    august:'2000',
+                    september:'2000',
+                    october:'2000',
+                    november:'2000',
+                    december:'2000'
+                },'2018' : {
+                    january:'2000',
+                    february:'2000',
+                    march:'2000',
+                    april:'2000',
+                    may:'2000',
+                    june:'2000',
+                    july:'2000',
+                    august:'2000',
+                    september:'2000',
+                    october:'2000',
+                    november:'2000',
+                    december:'2000'
+                }
+            }
             const entry = document.querySelector('hours-form');
             const toast = document.querySelector('paper-toast');
             entry.addEventListener('sendhrs', event=>{
@@ -27,8 +70,13 @@
                 toast.open();
             })
 
-            entry.addEventListener('change',event=>{
-                toast.text=JSON.stringify(event.detail);
+            entry.addEventListener('change', event=>{
+                toast.text=JSON.stringify(event.detail.year);
+
+                entry.set(yearCollection[event.detail.year]);
+                entry.edit(event.detail.year);
+                
+
                 toast.open();
             })
             </script>
