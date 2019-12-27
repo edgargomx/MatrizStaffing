@@ -62,12 +62,16 @@ class HoursTable extends LitElement {
   }
 
   addNewYear(newYear){
-    this.years = [...this.years, {year: newYear}]
+    this.years = [...this.years, {year: newYear}];
     this.__renderAll();
   }
 
   updated() {
     this.__renderAll();
+  }
+
+  getYearCollection(){
+    return this.years;
   }
 
   render() {
