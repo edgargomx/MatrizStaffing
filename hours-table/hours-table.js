@@ -22,7 +22,7 @@ class HoursTable extends LitElement {
 
   constructor() {
     super();
-    this.url = '/Assets/Acciones.png'
+    this.url = ''
     this.years = [];
     this.hours = {};
     this.rawData = [];
@@ -104,7 +104,9 @@ registerStyles('vaadin-grid', css`
 registerStyles('vaadin-button', css`
   :host([theme~="primary"]) {
         background: var(--background-gradient);
-        border-radius: 30px
+        border-radius: 30px;
+        font-size: var(--font-size-button);
+        width: 350px;
       }
 `);
 

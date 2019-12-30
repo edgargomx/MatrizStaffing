@@ -1,17 +1,14 @@
 import { css } from 'lit-element';
 
 export default css`
-@charset "UTF-8";
-@font-face {
-  font-family: 'Grotesk';
-  src: url("Assets/tipografías/Typo Grotesk Primaria.otf"); }
-
 :host {
   display: inline-block;
   box-sizing: border-box;
   width: 100vw;
+  --primary-color: #00ACEA;
+  --second-color: #00EFD1;
   --background-gradient: linear-gradient(0deg, #00ACEA 0%, #00EFD1 100%);
-  font-family: Grotesk, Verdana; }
+  font-family: Grotesk; }
 
 :host([hidden]), [hidden] {
   display: none !important; }

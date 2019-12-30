@@ -1,8 +1,10 @@
 :host {
   display: inline-block;
   box-sizing: border-box;
+  --primary-color: #00ACEA;
+  --second-color: #00EFD1;
   --background-gradient: linear-gradient(0deg, #00ACEA 0%, #00EFD1 100%);
-  --font-size-button: 12px;
+  font-family: Grotesk;
 }
 
 :host([hidden]), [hidden] {
