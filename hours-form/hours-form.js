@@ -273,7 +273,13 @@ registerStyles('vaadin-text-field', css`
       }
 `);
 
-
+registerStyles('vaadin-button', css`
+  :host([theme~="primary"]) {
+        background: var(--background-gradient);
+        border-radius: 30px;
+        font-size: var(--font-size-button);
+      }
+`);
 
 
 window.customElements.define("hours-form", HoursForm);

@@ -4,8 +4,11 @@ export default css`
 :host {
   display: inline-block;
   box-sizing: border-box;
-  --font-family: Verdana;
-  --label-color: #757575; }
+  --label-color: #757575;
+  --primary-color: #00ACEA;
+  --second-color: #00EFD1;
+  --background-gradient: linear-gradient(0deg, #00ACEA 0%, #00EFD1 100%);
+  font-family: Grotesk; }
 
 :host([hidden]), [hidden] {
   display: none !important; }
