@@ -15,10 +15,10 @@ import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styl
 class HoursForm extends LitElement {
   static get properties() {
     return {
-      years:Array,
-      yearSelected:Number,
-      title:String,
-      eventName:String
+      years:{type: Array},
+      yearSelected:{type: Number},
+      title:{type: String},
+      eventName:{type: String}
     };
   }
 
@@ -55,13 +55,15 @@ class HoursForm extends LitElement {
 
   edit(){
     this.title = 'Editar los años';
-    this.eventName = 'edited'
+    this.eventName = 'edited';
+    this.shadowRoot.querySelector('#year').disabled = true;
     this.validateForEdit(this.yearSelected);
   }
 
   create(){
     this.title = 'Crear nuevo año';
-    this.eventName = 'created'
+    this.eventName = 'created';
+    this.shadowRoot.querySelector('#year').disabled = false;
     this.validateForCreate(this.yearSelected);
   }
 
@@ -91,6 +93,7 @@ class HoursForm extends LitElement {
       for(const itr of textFields){
         itr.disabled=false;
       };
+      this.shadowRoot.querySelector('vaadin-button').disabled=false;
       if(parseInt(year) === new Date().getFullYear()){
         this.validateMonths(textFields);
       };
@@ -106,6 +109,12 @@ class HoursForm extends LitElement {
     this.yearSelected=event.target.value;
     if(this.years.indexOf(this.yearSelected) !== -1){
       this.validateForEdit(this.yearSelected);
+    } else {
+      this.shadowRoot.querySelector('vaadin-button').disabled=false;
+      const textFields= this.shadowRoot.querySelectorAll('.month');
+      for(const itr of textFields){
+        itr.disabled=false;
+      };
     }
     const integerField = this.shadowRoot.querySelectorAll('.month')
     for(const month of integerField){
