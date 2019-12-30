@@ -5,6 +5,7 @@ import '@vaadin/vaadin-grid/vaadin-grid-column';
 import '@vaadin/vaadin-grid/vaadin-grid-selection-column';
 import '@vaadin/vaadin-grid/vaadin-grid-sort-column';
 import '@vaadin/vaadin-button/vaadin-button.js';
+import '@ironbit/hours-form/hours-form.js';
 import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles';
 
 class HoursTable extends LitElement {
@@ -12,7 +13,9 @@ class HoursTable extends LitElement {
     return {
       url: {type: String},
       years : {type: Array},
-      newYear: {type: Object}
+      newYear: {type: Object},
+      rawData: {type: Array},
+      hours: {type: Object}
     };
   }
 
@@ -25,10 +28,22 @@ class HoursTable extends LitElement {
     this.url = '/Assets/Acciones.png'
     this.years = [];
     this.hours = {};
-    this.rawData = [];
+    this.rawData = {};
     this.newYear = '';
   }
 
+  setRawData(rawData){
+    this.rawData = rawData;
+    this.years = [];
+    this.hours = {};
+    for(const year in rawData){
+      this.years = [...this.years, {year: year}];
+    }
+  }
+
+  __getHours(year){
+    this.hours = this.rawData[year]
+  }
   __renderAll(){
       customElements.whenDefined('vaadin-grid').then( () => {
       const grid = this.shadowRoot.querySelector('vaadin-grid');
@@ -42,11 +57,12 @@ class HoursTable extends LitElement {
         }
       };
 
-      grid.items = this.years
+      grid.items = this.years;
     }).then( () => {
       const vaadinButton = this.shadowRoot.querySelector('vaadin-button')
       vaadinButton.addEventListener('click', () => {
-        this.dispatchEvent(new Event('open-form'));
+        this.shadowRoot.querySelector('hours-form').display();
+        this.shadowRoot.querySelector('hours-form').create();
       })
     })
   }
@@ -57,8 +73,11 @@ class HoursTable extends LitElement {
     icon.alt = this.url;
     icon.id = id
     icon.addEventListener('click', event => {
-      this.dispatchEvent(new CustomEvent('year-selected',
-      {detail: {year: event.currentTarget.id}})) 
+      const form = this.shadowRoot.querySelector('hours-form');
+      form.display();
+      form.edit();
+      this.__getHours(event.currentTarget.id);
+      form.set(event.currentTarget.id, this.hours);
     })
 
     return icon
@@ -73,6 +92,22 @@ class HoursTable extends LitElement {
     this.__renderAll();
   }
 
+  firstUpdated(){
+    const form = this.shadowRoot.querySelector('hours-form');
+    customElements.whenDefined(form.localName).then(() => {
+        form.addEventListener('years-changed', event => {
+          this.__getHours(event.detail.year);
+          form.set(event.detail.year,  this.hours);
+        })
+        form.addEventListener('edited', event => {
+          this.dispatchEvent(new CustomEvent('edited', {detail: event.detail}))
+        })
+        form.addEventListener('created', event => {
+          this.dispatchEvent(new CustomEvent('created', {detail: event.detail}))
+        })
+    })
+  }
+
   getYearCollection(){
     return this.years;
   }
@@ -85,6 +120,7 @@ class HoursTable extends LitElement {
               <vaadin-grid-column width="9em" header="Acciones"></vaadin-grid-column>
           </vaadin-grid>
           <vaadin-button theme="primary" class="margin-top-md">Registro</vaadin-button>
+          <hours-form></hours-form>
         </div>
       `;
     }

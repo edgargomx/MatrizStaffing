@@ -42,21 +42,74 @@
             const demoOfTwo = document.querySelector('#demo-two');
             const firstNewYear = document.querySelector('#first-year');
             const secondNewYear = document.querySelector('#second-year');
-            demoInsert.years = [{
-                year: '2010'}, {
-                year: '2011'
-                },{
-                year: '2012'}]
-            demoYearSelected.years = [{
-                year: '2010'}, {
-                year: '2011'
-                },{
-                year: '2012'}]
-                demoOfTwo.years = [{
-                year: '2010'}, {
-                year: '2011'
-                },{
-                year: '2012'}]
+            
+            const rawData = {
+            '2020' : {
+                january:'220',
+                february:'220',
+                march:'220',
+                april:'220',
+                    may:'220',
+                    june:'220',
+                    july:'220',
+                    august:'220',
+                    september:'220',
+                    october:'220',
+                    november:'220',
+                    december:'220'
+                },'2019' : {
+                    january:'219',
+                    february:'219',
+                    march:'219',
+                    april:'219',
+                    may:'219',
+                    june:'219',
+                    july:'219',
+                    august:'219',
+                    september:'219',
+                    october:'219',
+                    november:'219',
+                    december:'219'
+                },'2018' : {
+                    january:'218',
+                    february:'218',
+                    march:'218',
+                    april:'218',
+                    may:'218',
+                    june:'218',
+                    july:'218',
+                    august:'218',
+                    september:'218',
+                    october:'218',
+                    november:'218',
+                    december:'218'
+                }, '2021' : {
+                    january:'221',
+                    february:'221',
+                    march:'221',
+                    april:'221',
+                    may:'221',
+                    june:'221',
+                    july:'221',
+                    august:'221',
+                    september:'221',
+                    october:'221',
+                    november:'221',
+                    december:'221'
+                }
+            }
+            for(const demos of [demoInsert, demoYearSelected, demoOfTwo]){
+                customElements.whenDefined(demos.localName).then(() => {
+                    demos.setRawData(rawData)
+                    demos.addEventListener('edited', event => {
+                        console.log(event.detail)
+                    })
+                    demos.addEventListener('created', event => {
+                        console.log(event.detail)
+                    })
+                })
+            }
+            
             demoYearSelected.addEventListener('year-selected', event => {
                 paperToastYears.text = event.detail.year;
                 paperToastYears.open()

@@ -16,7 +16,8 @@
   "dependencies": {
     "@vaadin/vaadin-button": "^2.2.1",
     "@vaadin/vaadin-grid": "^5.5.0",
-    "lit-element": "^2.0.0"
+    "lit-element": "^2.0.0",
+    "@ironbit/hours-form": "^1.0.0"
   },
   "devDependencies": {
     "@open-wc/testing": "^0.9.11",
