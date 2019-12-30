@@ -1,8 +1,9 @@
 import { html, LitElement } from 'lit-element';
 import style from './hours-form-styles.js';
-import '@vaadin/vaadin-text-field/vaadin-integer-field'
-import '@vaadin/vaadin-combo-box/vaadin-combo-box'
-import '@vaadin/vaadin-button/vaadin-button'
+import '@vaadin/vaadin-text-field/vaadin-integer-field';
+import '@vaadin/vaadin-combo-box/vaadin-combo-box';
+import '@vaadin/vaadin-button/vaadin-button';
+import '@polymer/paper-dialog/paper-dialog';
 import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles'; 
 
 /**
@@ -56,13 +57,22 @@ class HoursForm extends LitElement {
   edit(){
     this.title = 'Editar los años';
     this.eventName = 'edited';
+    this.display();
     this.shadowRoot.querySelector('#year').disabled = true;
     this.validateForEdit(this.yearSelected);
+  }
+
+  clear(){
+    const integerField = this.shadowRoot.querySelectorAll('.month');
+    for(const month of integerField){
+      month.value = '';
+    }
   }
 
   create(){
     this.title = 'Crear nuevo año';
     this.eventName = 'created';
+    this.display();
     this.shadowRoot.querySelector('#year').disabled = false;
     this.validateForCreate(this.yearSelected);
   }
@@ -116,10 +126,7 @@ class HoursForm extends LitElement {
         itr.disabled=false;
       };
     }
-    const integerField = this.shadowRoot.querySelectorAll('.month')
-    for(const month of integerField){
-      month.value = '';
-    }
+    this.clear();
       this.dispatchEvent(new CustomEvent('years-changed',{
         detail:{
           year:event.target.value 
@@ -171,15 +178,26 @@ class HoursForm extends LitElement {
       november :novInput.value,
       december :decInput.value
     }
-
+    this.clear();
+    this.hide();
     this.dispatchEvent(new CustomEvent(this.eventName,{
       detail: properties
     }))
   }
 
+  display(){
+    this.shadowRoot.querySelector('#modal').open();
+  }
+
+  hide(){
+    this.shadowRoot.querySelector('#modal').close();
+    this.clear();
+  }
+
   render() {
     return html`
-        <div class="col ">
+      <paper-dialog id="modal" modal>
+        <div id="container" class="col ">
           <h2 class="center-item">${this.title}</h2>
           <div class="row content-center">
             <div class="col">
@@ -241,9 +259,11 @@ class HoursForm extends LitElement {
           </div>
           <div class="row content-center margin-top-md">
             <vaadin-button @click="${this.send}" theme="primary">Guardar</vaadin-button>
+            <vaadin-button @click="${this.hide}" theme="primary">Cancelar</vaadin-button>
           </div>          
         </div>
-      `;
+      </paper-dialog>
+    `;
     }
 }
 

@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-
+    
     <div id="save-div">
         <h2>Save data</h2>
         <hours-form id="hours-form-save"></hours-form>
@@ -97,7 +97,6 @@
         //Add data procesor: Receive object with data and return an array and a property object
         const hoursForms = document.querySelectorAll('hours-form');
         const divs = [
-            document.querySelector('#save-div'),
             document.querySelector('#edit-div'),
             document.querySelector('#select-for-edit')
         ]
@@ -124,6 +123,7 @@
         const hoursSaved = document.querySelector('#hours-saved-1');
         firstForm.addEventListener('created', event => {
             hoursSaved.text = JSON.stringify(event.detail);
+            hoursSaved.text = `Year created: ${hoursSaved.text}`
             hoursSaved.open();
         })
         const secondForm = document.querySelector('#hours-form-edit');
@@ -136,13 +136,13 @@
             thirdForm.edit();
         }
 
-        const allButtons = document.querySelectorAll('.years-class')
+        const allButtons = document.querySelectorAll('.years-class');
             for(const button of allButtons){
                 button.addEventListener('click', event => {
                     const hoursForm = event.currentTarget.parentElement.querySelector('hours-form');
                     hoursForm.set(event.currentTarget.value ,yearCollection[event.currentTarget.value]);
                 });
-            }
+            };
     </script>
 </body>
 </html>
