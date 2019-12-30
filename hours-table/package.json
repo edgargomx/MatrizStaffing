@@ -1,5 +1,5 @@
 {
-  "name": "@catsys/hours-table",
+  "name": "@ironbit/hours-table",
   "version": "1.0.0",
   "description": "Catsys component generated",
   "main": "hours-table.js",

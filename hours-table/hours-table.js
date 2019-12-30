@@ -24,6 +24,8 @@ class HoursTable extends LitElement {
     super();
     this.url = '/Assets/Acciones.png'
     this.years = [];
+    this.hours = {};
+    this.rawData = [];
     this.newYear = '';
   }
 
