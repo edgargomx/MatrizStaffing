@@ -199,7 +199,7 @@ class HoursForm extends LitElement {
       <paper-dialog id="modal" modal>
         <div id="container" class="col ">
           <h2 class="center-item">${this.title}</h2>
-          <div class="row content-center">
+          <div class="row content-center margin-bottom-sm">
             <div class="col">
               <div class="row">
                 <label>Año: </label>
@@ -257,7 +257,7 @@ class HoursForm extends LitElement {
               </div>
             </div>
           </div>
-          <div class="row content-center margin-top-md">
+          <div class="row content-center btn-fixed">
             <vaadin-button @click="${this.send}" theme="primary">Guardar</vaadin-button>
             <vaadin-button @click="${this.hide}" theme="primary">Cancelar</vaadin-button>
           </div>          
@@ -278,6 +278,9 @@ registerStyles('vaadin-button', css`
         background: var(--background-gradient);
         border-radius: 30px;
         font-size: var(--font-size-button);
+      }
+      .vaadin-button-container {
+        margin-inline-end: 35px;
       }
 `);
 

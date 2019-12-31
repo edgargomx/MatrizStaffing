@@ -60,6 +60,9 @@ label {
 .margin-top-md {
   margin-top: 45px; }
 
+.margin-bottom-sm {
+  margin-bottom: 15px; }
+
 .margin-top-lg {
   margin-top: 60px; }
 
@@ -72,4 +75,17 @@ label {
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); }
+
+paper-dialog {
+  border-radius: 30px;
+  overflow: auto; }
+
+.btn-fixed {
+  position: fixed;
+  margin-top: 480px;
+  align-self: center; }
+
+@media (min-width: 600px) {
+  .btn-fixed {
+    margin-top: 390px; } }
 `;
