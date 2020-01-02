@@ -111,10 +111,36 @@
                 customElements.whenDefined(demos.localName).then(() => {
                     demos.setRawData(rawData)
                     demos.addEventListener('edited', event => {
-                        console.log(event.detail)
+                        rawData[event.detail.year] = {
+                            january: event.detail.january,
+                            february :event.detail.february,
+                            march    :event.detail.march,
+                            april    :event.detail.april,
+                            may      :event.detail.may,
+                            june     :event.detail.june,
+                            july     :event.detail.july,
+                            august   :event.detail.august,
+                            september :event.detail.september,
+                            october  :event.detail.october,
+                            november :event.detail.november,
+                            december :event.detail.december
+                        }
                     })
                     demos.addEventListener('created', event => {
-                        console.log(event.detail)
+                        rawData[event.detail.year] = {
+                            january: event.detail.january,
+                            february :event.detail.february,
+                            march    :event.detail.march,
+                            april    :event.detail.april,
+                            may      :event.detail.may,
+                            june     :event.detail.june,
+                            july     :event.detail.july,
+                            august   :event.detail.august,
+                            september :event.detail.september,
+                            october  :event.detail.october,
+                            november :event.detail.november,
+                            december :event.detail.december
+                        }
                     })
                 })
             }
