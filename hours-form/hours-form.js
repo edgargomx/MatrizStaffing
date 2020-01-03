@@ -4,6 +4,7 @@ import '@vaadin/vaadin-text-field/vaadin-integer-field';
 import '@vaadin/vaadin-combo-box/vaadin-combo-box';
 import '@vaadin/vaadin-button/vaadin-button';
 import '@polymer/paper-dialog/paper-dialog';
+import '@polymer/paper-input/paper-input-container.js';
 import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles'; 
 
 /**
@@ -62,11 +63,15 @@ class HoursForm extends LitElement {
     this.validateForEdit(this.yearSelected);
   }
 
-  clear(){
+  clearMonths(){
     const integerField = this.shadowRoot.querySelectorAll('.month');
     for(const month of integerField){
       month.value = '';
     }
+  }
+
+  clearYear(){
+    this.shadowRoot.querySelector('#year').value = '';
   }
 
   create(){
@@ -120,13 +125,12 @@ class HoursForm extends LitElement {
     if(this.years.indexOf(this.yearSelected) !== -1){
       this.validateForEdit(this.yearSelected);
     } else {
-      this.shadowRoot.querySelector('vaadin-button').disabled=false;
       const textFields= this.shadowRoot.querySelectorAll('.month');
       for(const itr of textFields){
         itr.disabled=false;
       };
     }
-    this.clear();
+    this.clearMonths();
       this.dispatchEvent(new CustomEvent('years-changed',{
         detail:{
           year:event.target.value 
@@ -178,7 +182,8 @@ class HoursForm extends LitElement {
       november :novInput.value,
       december :decInput.value
     }
-    this.clear();
+    this.clearMonths();
+    this.clearYear();
     this.hide();
     this.dispatchEvent(new CustomEvent(this.eventName,{
       detail: properties
@@ -191,7 +196,8 @@ class HoursForm extends LitElement {
 
   hide(){
     this.shadowRoot.querySelector('#modal').close();
-    this.clear();
+    this.clearMonths();
+    this.clearYear();
   }
 
   render() {
