@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit-element';
 import style from './hours-table-styles.js';
 import '@fluidnext-polymer/paper-grid/paper-grid.js';
 import '@polymer/paper-button/paper-button.js';
-// import '@ironbit/hours-form/hours-form.js';
+import '@ironbit/hours-form/hours-form.js';
 // import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles';
 
 class HoursTable extends LitElement {
@@ -11,7 +11,7 @@ class HoursTable extends LitElement {
       url: {type: String},
       years : {type: Array},
       newYear: {type: Object},
-      rawData: {type: Array},
+      rawData: {type: Object},
       hours: {type: Object}
     };
   }
@@ -36,6 +36,9 @@ class HoursTable extends LitElement {
     for(const year in rawData){
       this.years = [...this.years, {year: year}];
     }
+    customElements.whenDefined('paper-grid').then(()=> {
+    this.__renderAll();
+    })
   }
 
   throwCells(){
@@ -48,7 +51,9 @@ class HoursTable extends LitElement {
       }
       return elements
     } else {
-      return '<p>Not data jet</p>'
+      const emptyMessage = document.createElement('h3');
+      emptyMessage.appendChild(document.createTextNode('No hay datos aún'))
+      return [emptyMessage];
     }
 
   }
@@ -57,7 +62,7 @@ class HoursTable extends LitElement {
   }
 
   __buildYearCell(row, text){
-    const yearCell = document.createElement('p');
+    const yearCell = document.createElement('h3');
     const colAtt = document.createAttribute('col');
     const rowAtt = document.createAttribute('row');
     colAtt.value = 0;
@@ -91,12 +96,14 @@ class HoursTable extends LitElement {
   }
 
   __renderAll(){
+    console.log('is rendering')
       const grid = this.shadowRoot.querySelector('#grid');
+      grid.innerHTML='';
       customElements.whenDefined(grid.localName).then(() => {
         for(const cell of this.throwCells()){
           grid.appendChild(cell);
-        }
-      })
+        };
+      });
   }
 
   __addEventListenerToAllIcons(){
@@ -122,11 +129,23 @@ class HoursTable extends LitElement {
   // }
 
   firstUpdated(){
-    this.__renderAll();
     const registerButton = this.shadowRoot.querySelector('paper-button');
     registerButton.addEventListener('click', () => {
       this.shadowRoot.querySelector('hours-form').display();
       this.shadowRoot.querySelector('hours-form').create();
+    });
+    const form = this.shadowRoot.querySelector('hours-form');
+    customElements.whenDefined(form.localName).then(() => {
+        form.addEventListener('years-changed', event => {
+          this.__getHours(event.detail.year);
+          form.set(event.detail.year,  this.hours);
+        })
+        form.addEventListener('edited', event => {
+          this.dispatchEvent(new CustomEvent('edited', {detail: event.detail}))
+        })
+        form.addEventListener('created', event => {
+          this.dispatchEvent(new CustomEvent('created', {detail: event.detail}))
+        })
     })
   }
 
