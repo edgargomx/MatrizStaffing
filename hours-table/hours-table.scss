@@ -16,7 +16,7 @@
 
 *, *:before, *:after {
   box-sizing: inherit;
-  font-family: --font-family;
+  font-family: var(--font-family);
 }
 
 .col {
@@ -66,5 +66,7 @@ paper-button{
   color: white;
   border-radius: 30px;
   font-size: var(--font-size-button);
-  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 150px;
 }
