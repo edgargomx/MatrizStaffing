@@ -125,11 +125,45 @@
             hoursSaved.text = JSON.stringify(event.detail);
             hoursSaved.text = `Year created: ${hoursSaved.text}`
             hoursSaved.open();
+            yearCollection[event.detail.year] = {
+                        january: event.detail.january,
+                        february: event.detail.february,
+                        march: event.detail.march,
+                        april: event.detail.april,
+                        may: event.detail.may,
+                        june: event.detail.june,
+                        july: event.detail.july,
+                        august: event.detail.august,
+                        september: event.detail.september,
+                        october: event.detail.october,
+                        november: event.detail.november,
+                        december: event.detail.december,
+                    }
         })
+
         const secondForm = document.querySelector('#hours-form-edit');
         const startForEdit = () => {
             secondForm.edit();
         }
+        secondForm.addEventListener('edited', event => {
+            hoursSaved.text = JSON.stringify(event.detail);
+            hoursSaved.text = `Year created: ${hoursSaved.text}`
+            hoursSaved.open();
+            yearCollection[event.detail.year] = {
+                        january: event.detail.january,
+                        february: event.detail.february,
+                        march: event.detail.march,
+                        april: event.detail.april,
+                        may: event.detail.may,
+                        june: event.detail.june,
+                        july: event.detail.july,
+                        august: event.detail.august,
+                        september: event.detail.september,
+                        october: event.detail.october,
+                        november: event.detail.november,
+                        december: event.detail.december,
+                    }
+        })
 
         const thirdForm = document.querySelector('#hours-form-select-edit');
         const startForEditSelected = () => {
@@ -141,6 +175,7 @@
                 button.addEventListener('click', event => {
                     const hoursForm = event.currentTarget.parentElement.querySelector('hours-form');
                     hoursForm.set(event.currentTarget.value ,yearCollection[event.currentTarget.value]);
+                    hoursForm.display();
                 });
             };
     </script>
