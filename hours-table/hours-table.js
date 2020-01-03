@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit-element';
 import style from './hours-table-styles.js';
 import '@fluidnext-polymer/paper-grid/paper-grid.js';
 import '@polymer/paper-button/paper-button.js';
-import '@ironbit/hours-form/hours-form.js';
+// import '@ironbit/hours-form/hours-form.js';
 // import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles';
 
 class HoursTable extends LitElement {
@@ -62,18 +62,22 @@ class HoursTable extends LitElement {
   }
 
   __buildYearCell(row, text){
+    const cell = document.createElement('div');
     const yearCell = document.createElement('h3');
     const colAtt = document.createAttribute('col');
     const rowAtt = document.createAttribute('row');
     colAtt.value = 0;
     rowAtt.value = row;
-    yearCell.setAttributeNode(colAtt);
-    yearCell.setAttributeNode(rowAtt)
     yearCell.appendChild(document.createTextNode(text));
-    return yearCell;
+    cell.setAttributeNode(colAtt);
+    cell.setAttributeNode(rowAtt)
+    cell.appendChild( yearCell );
+
+    return cell;
   }
 
   __buildIcon(data, row){
+    const cell = document.createElement('div');
     const icon = document.createElement('img');
     const colAtt = document.createAttribute('col');
     const rowAtt = document.createAttribute('row');
@@ -82,8 +86,6 @@ class HoursTable extends LitElement {
     icon.src = this.url;
     icon.alt = this.url;
     icon.id = data;
-    icon.setAttributeNode(colAtt);
-    icon.setAttributeNode(rowAtt);
     icon.addEventListener('click', event => {
       const form = this.shadowRoot.querySelector('hours-form');
       form.display();
@@ -91,19 +93,22 @@ class HoursTable extends LitElement {
       this.__getHours(event.currentTarget.id);
       form.set(event.currentTarget.id, this.hours);
     })
+    cell.setAttributeNode(colAtt);
+    cell.setAttributeNode(rowAtt)
+    cell.appendChild( icon );
 
-    return icon
+    return cell
   }
 
   __renderAll(){
     console.log('is rendering')
-      const grid = this.shadowRoot.querySelector('#grid');
+      /*const grid = this.shadowRoot.querySelector('#grid');
       grid.innerHTML='';
       customElements.whenDefined(grid.localName).then(() => {
         for(const cell of this.throwCells()){
           grid.appendChild(cell);
         };
-      });
+      });*/
   }
 
   __addEventListenerToAllIcons(){
@@ -156,10 +161,23 @@ class HoursTable extends LitElement {
   render() {
     return html`
         <div class="col content-center">
-          <paper-grid id="grid">
-            
-          </paper-grid>
-          <paper-button >Registrar</paper-button>
+          <table>
+            <thead>
+              <th>Año</th>
+              <th>Acciones</th>
+            </thead>
+            <tbody>
+              ${ this.years.map( (year, index) => { 
+                return html`<tr>
+                              <td>${ year.year }</td>
+                              <td>
+                                <img src="${ this.url }" alt="acciones${year.year}" id="${year.year}">
+                              </td>
+                            </tr>`;
+              }) }
+            </tbody>
+          </table>
+          <paper-button class="margin-top-md" >Registrar</paper-button>
         </div>
         <hours-form></hours-form>
       `;
