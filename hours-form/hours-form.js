@@ -1,15 +1,13 @@
 import { html, LitElement } from 'lit-element';
 import style from './hours-form-styles.js';
-import '@vaadin/vaadin-text-field/vaadin-integer-field';
-import '@vaadin/vaadin-combo-box/vaadin-combo-box';
-import '@vaadin/vaadin-button/vaadin-button';
+import '@polymer/paper-input/paper-input'
+import '@polymer/paper-button/paper-button'
 import '@polymer/paper-dialog/paper-dialog';
-import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles'; 
 
 /**
  * `<hours-form>` is the component that contains
  * the format of the hours of the worked year
- * this component display a combo box with the year
+ * this component display an input with the year
  * and the months with their hours 
  */
 
@@ -103,12 +101,12 @@ class HoursForm extends LitElement {
       for(const itr of textFields){
         itr.disabled=false;
       };
-      this.shadowRoot.querySelector('vaadin-button').disabled=false;
+      this.shadowRoot.querySelector('paper-button').disabled=false;
       if(parseInt(year) === new Date().getFullYear()){
         this.validateMonths(textFields);
       };
     }else{
-      this.shadowRoot.querySelector('vaadin-button').disabled=true;
+      this.shadowRoot.querySelector('paper-button').disabled=true;
       for(const itr of textFields){
         itr.disabled=true;
       }
@@ -120,7 +118,7 @@ class HoursForm extends LitElement {
     if(this.years.indexOf(this.yearSelected) !== -1){
       this.validateForEdit(this.yearSelected);
     } else {
-      this.shadowRoot.querySelector('vaadin-button').disabled=false;
+      this.shadowRoot.querySelector('paper-button').disabled=false;
       const textFields= this.shadowRoot.querySelectorAll('.month');
       for(const itr of textFields){
         itr.disabled=false;
@@ -197,89 +195,145 @@ class HoursForm extends LitElement {
   render() {
     return html`
       <paper-dialog id="modal" modal>
+        <paper-dialog-scrollable>
         <div id="container" class="col ">
           <h2 class="center-item">${this.title}</h2>
-          <div class="row content-center">
+          <div class="row content-center padding-md">
             <div class="col">
               <div class="row">
                 <label>Año: </label>
-                <vaadin-integer-field @change="${this.changeYear}" theme="custom-border" id="year" min="2000"></vaadin-integer-field>
+                <paper-input label="AÑO" 
+                required auto-validate error-message="introduzca año" 
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="4"
+                @change="${this.changeYear}"
+                id="year"></paper-input>
               </div>
               <div class="row margin-top-sm">
                 <label>Enero:</label>
-                <vaadin-integer-field id="january" min="0" class="month" ></vaadin-integer-field>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="january"
+                class="month"
+                ></paper-input>
               </div>
               <div class="row ">
                 <label>Febrero:</label>
-                <vaadin-integer-field id="february" min="0" class="month"></vaadin-integer-field>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="february"
+                class="month"
+                ></paper-input>
               </div>
               <div class="row ">
                 <label>Marzo:</label>
-                <vaadin-integer-field id="march" min="0" class="month"></vaadin-integer-field>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="march"
+                class="month"
+                ></paper-input>
               </div>
               <div class="row ">
                 <label>Abril:</label>
-                <vaadin-integer-field id="april" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="april"
+                class="month"
+                ></paper-input>              </div>
               <div class="row ">
                 <label>Mayo:</label>
-                <vaadin-integer-field id="may" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="may"
+                class="month"
+                ></paper-input>              </div>
               <div class="row">
                 <label>Junio:</label>
-                <vaadin-integer-field id="june" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="june"
+                class="month"
+                ></paper-input>              </div>
             </div>
             <div class="col">
               <div class="row margin-top-lg">
                 <label>Julio:</label>
-                <vaadin-integer-field id="july" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="july"
+                class="month"
+                ></paper-input>               </div>
               <div class="row ">
                 <label>Agosto:</label>
-                <vaadin-integer-field id="august" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="august"
+                class="month"
+                ></paper-input>              </div>
               <div class="row ">
                 <label>Sep:</label>
-                <vaadin-integer-field id="september" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="september"
+                class="month"
+                ></paper-input>              </div>
               <div class="row ">
                 <label>Oct:</label>
-                <vaadin-integer-field id="october" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="october"
+                class="month"
+                ></paper-input>              </div>
               <div class="row ">
                 <label>Nov:</label>
-                <vaadin-integer-field id="november" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="november"
+                class="month"
+                ></paper-input>              </div>
               <div class="row ">
                 <label>Dic:</label>
-                <vaadin-integer-field id="december" min="0" class="month"></vaadin-integer-field>
-              </div>
+                <paper-input label="HRS"
+                required auto-validate error-message="introduzca horas"
+                auto-validate allowed-pattern="[0-9]"
+                 maxlength="3"
+                id="december"
+                class="month"
+                ></paper-input>              </div>
             </div>
           </div>
           <div class="row content-center margin-top-md">
-            <vaadin-button @click="${this.send}" theme="primary">Guardar</vaadin-button>
-            <vaadin-button @click="${this.hide}" theme="primary">Cancelar</vaadin-button>
+        <paper-button @click="${this.send}" >Guardar</paper-button>
+        <paper-button @click="${this.hide}">Cancelar</paper-button>
           </div>          
         </div>
+        </paper-dialog-scrollable>
       </paper-dialog>
     `;
     }
 }
-
-registerStyles('vaadin-text-field', css`
-  :host([theme~="custom-border"]) [part="input-field"] {
-        width: 130px;
-      }
-`);
-
-registerStyles('vaadin-button', css`
-  :host([theme~="primary"]) {
-        background: var(--background-gradient);
-        border-radius: 30px;
-        font-size: var(--font-size-button);
-      }
-`);
 
 
 window.customElements.define("hours-form", HoursForm);
