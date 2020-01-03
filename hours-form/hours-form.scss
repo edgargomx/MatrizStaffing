@@ -89,7 +89,17 @@ label {
 paper-dialog{
   overflow: auto;
 }
-
+iron-input > input {
+  font-size: 12px;
+  border-radius: 8px;
+  border: 2px #F1F1F1 solid;
+  margin-top: 15px;
+  padding: 10px;
+}
+input:focus {
+  border-radius: 8px;
+  outline-offset: -20px;
+}
 
 paper-button{
   background: var(--background-gradient);
@@ -100,4 +110,23 @@ paper-button{
 }
 .padding-md {
   padding: 45px;
+}
+
+paper-dialog {
+  border-radius: 30px;
+  overflow: auto; }
+.btn-fixed {
+  position: fixed;
+  margin-top: 450px;
+  align-self: center; }
+
+
+.margin-bottom-sm {
+  margin-bottom: 15px; 
+  padding: 15px;
+}
+
+@media (min-width: 600px) {
+  .btn-fixed {
+    margin-top: 480px; } 
 }

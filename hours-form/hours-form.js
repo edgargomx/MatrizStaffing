@@ -1,7 +1,5 @@
 import { html, LitElement } from 'lit-element';
 import style from './hours-form-styles.js';
-//import '@polymer/paper-input/paper-input'
-
 import '@polymer/paper-button/paper-button'
 import '@polymer/paper-dialog/paper-dialog';
 
@@ -207,7 +205,7 @@ class HoursForm extends LitElement {
         <paper-dialog-scrollable>
         <div id="container" class="col ">
           <h2 class="center-item">${this.title}</h2>
-          <div class="row content-center padding-md">
+          <div class="row content-center margin-bottom-sm ">
             <div class="col">
               <div class="row">
                 <label>Año: </label>
@@ -224,7 +222,7 @@ class HoursForm extends LitElement {
               </div>
               <div class="row margin-top-sm">
                 <label>Enero:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -233,11 +231,11 @@ class HoursForm extends LitElement {
                   class="month"
                   id="january"
                   required>
-                </iron-button>
+                </iron-input>
               </div>
               <div class="row ">
                 <label>Febrero:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -246,11 +244,11 @@ class HoursForm extends LitElement {
                   class="month"
                   id="february"
                   required>
-                </iron-button>
+                </iron-input>
               </div>
               <div class="row ">
                 <label>Marzo:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -259,11 +257,11 @@ class HoursForm extends LitElement {
                   class="month"
                   id="march"
                   required>
-                </iron-button>
+                </iron-input>
               </div>
               <div class="row ">
                 <label>Abril:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -272,10 +270,10 @@ class HoursForm extends LitElement {
                   class="month"
                   id="april"
                   required>
-                </iron-button>             </div>
+                </iron-input>             </div>
               <div class="row ">
                 <label>Mayo:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -284,11 +282,11 @@ class HoursForm extends LitElement {
                   class="month"
                   id="may"
                   required>
-                </iron-button>
+                </iron-input>
                     </div>
               <div class="row">
                 <label>Junio:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -297,13 +295,13 @@ class HoursForm extends LitElement {
                   class="month"
                   id="june"
                   required>
-                </iron-button>
+                </iron-input>
                            </div>
             </div>
             <div class="col">
               <div class="row margin-top-lg">
                 <label>Julio:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -312,10 +310,10 @@ class HoursForm extends LitElement {
                   class="month"
                   id="july"
                   required>
-                </iron-button>              </div>
+                </iron-input>              </div>
               <div class="row ">
                 <label>Agosto:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -324,10 +322,10 @@ class HoursForm extends LitElement {
                   class="month"
                   id="august"
                   required>
-                </iron-button>              </div>
+                </iron-input>              </div>
               <div class="row ">
                 <label>Sep:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -336,10 +334,10 @@ class HoursForm extends LitElement {
                   class="month"
                   id="september"
                   required>
-                </iron-button>             </div>
+                </iron-input>             </div>
               <div class="row ">
                 <label>Oct:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -348,10 +346,10 @@ class HoursForm extends LitElement {
                   class="month"
                   id="october"
                   required>
-                </iron-button>            </div>
+                </iron-input>            </div>
               <div class="row ">
                 <label>Nov:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -360,10 +358,10 @@ class HoursForm extends LitElement {
                   class="month"
                   id="november"
                   required>
-                </iron-button>              </div>
+                </iron-input>              </div>
               <div class="row ">
                 <label>Dic:</label>
-                <iron-button>
+                <iron-input>
                   <input
                   placeholder="HRS"
                   minlength="1"
@@ -372,10 +370,10 @@ class HoursForm extends LitElement {
                   class="month"
                   id="december"
                   required>
-                </iron-button>              </div>
+                </iron-input>              </div>
             </div>
           </div>
-          <div class="row content-center margin-top-md">
+          <div class="row content-center btn-fixed">
         <paper-button @click="${this.send}" >Guardar</paper-button>
         <paper-button @click="${this.hide}">Cancelar</paper-button>
           </div>          
