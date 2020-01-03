@@ -14,9 +14,9 @@
     "test": "karma start"
   },
   "dependencies": {
+    "@polymer/iron-input": "^3.0.1",
     "@polymer/paper-button": "^3.0.1",
     "@polymer/paper-dialog": "^3.0.1",
-    "@polymer/paper-input": "^3.1.0",
     "lit-element": "^2.0.0"
   },
   "devDependencies": {
