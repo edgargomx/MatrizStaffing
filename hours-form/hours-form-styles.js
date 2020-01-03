@@ -103,7 +103,7 @@ paper-dialog {
 
 .btn-fixed {
   position: fixed;
-  margin-top: 450px;
+  margin-top: 440px;
   align-self: center; }
 
 .margin-bottom-sm {
@@ -112,5 +112,5 @@ paper-dialog {
 
 @media (min-width: 600px) {
   .btn-fixed {
-    margin-top: 480px; } }
+    margin-top: 470px; } }
 `;

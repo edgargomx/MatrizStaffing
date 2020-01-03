@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit-element';
 import style from './hours-form-styles.js';
 import '@polymer/paper-button/paper-button'
 import '@polymer/paper-dialog/paper-dialog';
-import '@polymer/paper-input/paper-input-container.js';
+import '@polymer/iron-input/iron-input.js';
 
 /**
  * `<hours-form>` is the component that contains
@@ -137,7 +137,7 @@ class HoursForm extends LitElement {
     
   }
   set(year, hours){
-    const integerField = this.shadowRoot.querySelectorAll('.month');
+    const integerField = this.shadowRoot.querySelectorAll('.month input');
     this.yearSelected = year;
     
     if(hours){
@@ -229,77 +229,71 @@ class HoursForm extends LitElement {
               </div>
               <div class="row margin-top-sm">
                 <label>Enero:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="january"
                   required>
                 </iron-input>
               </div>
               <div class="row ">
                 <label>Febrero:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="february"
                   required>
                 </iron-input>
               </div>
               <div class="row ">
                 <label>Marzo:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="march"
                   required>
                 </iron-input>
               </div>
               <div class="row ">
                 <label>Abril:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="april"
                   required>
                 </iron-input>             </div>
               <div class="row ">
                 <label>Mayo:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="may"
                   required>
                 </iron-input>
                     </div>
               <div class="row">
                 <label>Junio:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="june"
                   required>
                 </iron-input>
@@ -308,73 +302,67 @@ class HoursForm extends LitElement {
             <div class="col">
               <div class="row margin-top-lg">
                 <label>Julio:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="july"
                   required>
                 </iron-input>              </div>
               <div class="row ">
                 <label>Agosto:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="august"
                   required>
                 </iron-input>              </div>
               <div class="row ">
                 <label>Sep:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="september"
                   required>
                 </iron-input>             </div>
               <div class="row ">
                 <label>Oct:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="october"
                   required>
                 </iron-input>            </div>
               <div class="row ">
                 <label>Nov:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="november"
                   required>
                 </iron-input>              </div>
               <div class="row ">
                 <label>Dic:</label>
-                <iron-input>
+                <iron-input class="month">
                   <input
                   placeholder="HRS"
                   minlength="1"
                   maxlength="3"
                   @input="${this.__isInteger}"
-                  class="month"
                   id="december"
                   required>
                 </iron-input>              </div>
