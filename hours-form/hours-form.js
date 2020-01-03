@@ -1,6 +1,5 @@
 import { html, LitElement } from 'lit-element';
 import style from './hours-form-styles.js';
-import '@polymer/paper-input/paper-input'
 import '@polymer/paper-button/paper-button'
 import '@polymer/paper-dialog/paper-dialog';
 import '@polymer/paper-input/paper-input-container.js';
@@ -199,139 +198,189 @@ class HoursForm extends LitElement {
     this.clearYear();
   }
 
+  __isInteger(event){
+    if(/^(-\d)?\d*$/.test(event.target.value)){
+    }else {
+      event.target.value = '';
+    }
+  }
+
   render() {
     return html`
+
       <paper-dialog id="modal" modal>
         <paper-dialog-scrollable>
         <div id="container" class="col ">
           <h2 class="center-item">${this.title}</h2>
-          <div class="row content-center padding-md">
+          <div class="row content-center margin-bottom-sm ">
             <div class="col">
               <div class="row">
                 <label>Año: </label>
-                <paper-input label="AÑO" 
-                required auto-validate error-message="introduzca año" 
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="4"
-                @change="${this.changeYear}"
-                id="year"></paper-input>
+                <iron-input>
+                  <input placeholder="AÑO"
+                  id="year"
+                  maxlength="4"
+                  minlength="4"
+                  @input="${ this.__isInteger }"
+                  @change="${this.changeYear}"
+                  >
+                </iron-input>
+                
               </div>
               <div class="row margin-top-sm">
                 <label>Enero:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="january"
-                class="month"
-                ></paper-input>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="january"
+                  required>
+                </iron-input>
               </div>
               <div class="row ">
                 <label>Febrero:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="february"
-                class="month"
-                ></paper-input>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="february"
+                  required>
+                </iron-input>
               </div>
               <div class="row ">
                 <label>Marzo:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="march"
-                class="month"
-                ></paper-input>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="march"
+                  required>
+                </iron-input>
               </div>
               <div class="row ">
                 <label>Abril:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="april"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="april"
+                  required>
+                </iron-input>             </div>
               <div class="row ">
                 <label>Mayo:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="may"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="may"
+                  required>
+                </iron-input>
+                    </div>
               <div class="row">
                 <label>Junio:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="june"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="june"
+                  required>
+                </iron-input>
+                           </div>
             </div>
             <div class="col">
               <div class="row margin-top-lg">
                 <label>Julio:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="july"
-                class="month"
-                ></paper-input>               </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="july"
+                  required>
+                </iron-input>              </div>
               <div class="row ">
                 <label>Agosto:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="august"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="august"
+                  required>
+                </iron-input>              </div>
               <div class="row ">
                 <label>Sep:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="september"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="september"
+                  required>
+                </iron-input>             </div>
               <div class="row ">
                 <label>Oct:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="october"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="october"
+                  required>
+                </iron-input>            </div>
               <div class="row ">
                 <label>Nov:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="november"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="november"
+                  required>
+                </iron-input>              </div>
               <div class="row ">
                 <label>Dic:</label>
-                <paper-input label="HRS"
-                required auto-validate error-message="introduzca horas"
-                auto-validate allowed-pattern="[0-9]"
-                 maxlength="3"
-                id="december"
-                class="month"
-                ></paper-input>              </div>
+                <iron-input>
+                  <input
+                  placeholder="HRS"
+                  minlength="1"
+                  maxlength="3"
+                  @input="${this.__isInteger}"
+                  class="month"
+                  id="december"
+                  required>
+                </iron-input>              </div>
             </div>
           </div>
-          <div class="row content-center margin-top-md">
+          <div class="row content-center btn-fixed">
         <paper-button @click="${this.send}" >Guardar</paper-button>
         <paper-button @click="${this.hide}">Cancelar</paper-button>
           </div>          
