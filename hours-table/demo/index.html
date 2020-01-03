@@ -125,6 +125,7 @@
                             november :event.detail.november,
                             december :event.detail.december
                         }
+                        demos.setRawData(rawData)
                     })
                     demos.addEventListener('created', event => {
                         rawData[event.detail.year] = {
@@ -141,6 +142,7 @@
                             november :event.detail.november,
                             december :event.detail.december
                         }
+                        demos.setRawData(rawData)
                     })
                 })
             }
